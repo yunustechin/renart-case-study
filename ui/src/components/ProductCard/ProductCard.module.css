@@ -1,0 +1,107 @@
+.productCard {
+  background-color: white;
+  border: 1px solid #f0f0f0; 
+  border-radius: 8px;
+  overflow: hidden;
+  flex: 0 0 280px;
+  transition: box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.productCard:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.productImageContainer {
+  width: 100%;
+  padding-top: 100%;
+  position: relative;
+  background-color: white; 
+}
+
+.productImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.productInfo {
+  padding: 15px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.productTitle {
+  font-weight: 500; 
+  font-size: 15px; 
+  margin: 0 0 5px 0;
+  flex-grow: 1;
+  color: #333333;
+}
+
+.productPrice {
+  font-size: 15px;
+  font-weight: 500;
+  color: #333333;
+  margin: 0 0 10px 0;
+}
+
+.colorPicker {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 5px;
+}
+
+.colorSwatch {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.colorSwatch.selected {
+  border-color: #a0a0a0; 
+  transform: scale(1.1);
+  box-shadow: inset 0 0 0 1px white;
+}
+
+.colorName {
+  font-size: 12px;
+  color: #666666;
+  margin: 0 0 12px 0;
+  min-height: 18px;
+}
+
+.starRating {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-yellow-gold);
+}
+
+.stars {
+  font-size: 18px;
+}
+
+.ratingText {
+  font-family: 'Amiri', serif;
+  font-size: 14px;
+  color: #333333;
+}
+
+@media (max-width: 768px) {
+  .productCard {
+    flex: 0 0 250px;
+  }
+}
