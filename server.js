@@ -1,15 +1,16 @@
 const dotenv = require('dotenv');
 dotenv.config();
-
 const app = require('./api/app');
-const logger = require('./utils/logger'); 
-
+const logger = require('./utils/logger');
 const PORT = process.env.PORT || 5000;
 
 const server = app.listen(PORT, () => {
-  logger.info(`Server is running on port ${PORT}`);
+  logger.info(`Server is running at http://localhost:${PORT}`);
 });
 
+/**
+ * Handles graceful server shutdown. Closes the server and exits the process.
+ */
 const exitHandler = () => {
   if (server) {
     server.close(() => {
@@ -21,6 +22,10 @@ const exitHandler = () => {
   }
 };
 
+/**
+ * Handles unexpected errors, logs them, and triggers a graceful shutdown.
+ * @param {Error} error - The unhandled error object.
+ */
 const unexpectedErrorHandler = (error) => {
   logger.error('Unhandled Error:', error);
   exitHandler();
@@ -28,7 +33,8 @@ const unexpectedErrorHandler = (error) => {
 
 process.on('uncaughtException', unexpectedErrorHandler);
 process.on('unhandledRejection', (reason) => {
-  throw reason;
+  logger.error('Unhandled Rejection:', reason);
+  exitHandler();
 });
 
 process.on('SIGTERM', () => {
