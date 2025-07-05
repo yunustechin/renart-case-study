@@ -1,4 +1,4 @@
-const logger = require('./logger');
+import logger from './logger.js'; 
 
 /**
  * Centralized Express error handling middleware.
@@ -25,4 +25,4 @@ const errorHandler = (err, req, res, next) => {
   });
 };
 
-module.exports = errorHandler;
+export default errorHandler;
