@@ -1,4 +1,4 @@
-const logger = require('../utils/logger');
+import logger from '../utils/logger.js';
 
 const BIGPARA_API_URL = "https://api.bigpara.hurriyet.com.tr/doviz/headerlist/altin";
 const CACHE_DURATION_MS = 5 * 60 * 1000; // 5 dakika
@@ -14,7 +14,7 @@ let cachedGoldPrice = {
  * Uses an in-memory cache to avoid excessive API calls.
  * @returns {Promise<number|null>} A promise that resolves to the gold price in USD, or null if an error occurs.
  */
-async function getGoldPrice() {
+export async function getGoldPrice() {
   const now = Date.now();
 
   if (cachedGoldPrice.priceInUSD !== null && (now - cachedGoldPrice.timestamp < CACHE_DURATION_MS)) {
@@ -64,5 +64,3 @@ async function getGoldPrice() {
     return null;
   }
 }
-
-module.exports = { getGoldPrice };
