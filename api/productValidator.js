@@ -1,10 +1,10 @@
-const { param, validationResult } = require('express-validator');
+import { param, validationResult } from 'express-validator';
 
 /**
  * Validation rules for the product ID URL parameter.
  * Checks if the 'id' is a non-negative integer.
  */
-const validateProductId = [
+export const validateProductId = [
   param('id')
     .isInt({ min: 0 })
     .withMessage('Product ID must be a non-negative integer.'),
@@ -14,15 +14,10 @@ const validateProductId = [
  * Middleware to handle the result of any validation checks.
  * If there are validation errors, it sends a 400 response. Otherwise, it proceeds.
  */
-const handleValidationErrors = (req, res, next) => {
+export const handleValidationErrors = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
   }
   next();
-};
-
-module.exports = {
-  validateProductId,
-  handleValidationErrors,
 };
