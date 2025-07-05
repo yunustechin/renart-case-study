@@ -1,5 +1,11 @@
 const productService = require('./productService');
 
+/**
+ * Express controller to handle the request for getting all products.
+ * @param {object} req - Express request object.
+ * @param {object} res - Express response object.
+ * @param {function} next - Express next middleware function.
+ */
 const getAllProducts = async (req, res, next) => {
   try {
     const products = await productService.getProducts();
@@ -9,11 +15,15 @@ const getAllProducts = async (req, res, next) => {
   }
 };
 
+/**
+ * Express controller to handle the request for getting a single product by its ID.
+ * @param {object} req - Express request object.
+ * @param {object} res - Express response object.
+ * @param {function} next - Express next middleware function.
+ */
 const getProductById = async (req, res, next) => {
   try {
-    const {
-      id
-    } = req.params;
+    const { id } = req.params;
     const product = await productService.getProductById(id);
 
     if (product) {
