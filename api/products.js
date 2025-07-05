@@ -1,6 +1,6 @@
-const express = require('express');
-const { getAllProducts, getProductById } = require('./productController');
-const { validateProductId, handleValidationErrors } = require('./productValidator');
+import express from 'express';
+import { getAllProducts, getProductById } from './productController.js';
+import { validateProductId, handleValidationErrors } from './productValidator.js';
 const router = express.Router();
 
 router.get('/', getAllProducts);
@@ -11,4 +11,4 @@ router.get(
   getProductById          
 );
 
-module.exports = router;
+export default router;
