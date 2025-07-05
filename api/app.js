@@ -1,7 +1,7 @@
-const express = require('express');
-const cors = require('cors');
-const productRoutes = require('./products');
-const errorHandler = require('../utils/errorHandler');
+import express from 'express';
+import cors from 'cors';
+import productRoutes from './products.js'; 
+import errorHandler from '../utils/errorHandler.js'; 
 const app = express();
 
 app.use(cors());
@@ -16,4 +16,4 @@ app.use((req, res, next) => {
 
 app.use(errorHandler);
 
-module.exports = app;
+export default app;
