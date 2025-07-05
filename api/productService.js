@@ -106,6 +106,5 @@ export const getProductById = async (productId) => {
       dynamicPrice: calculateDynamicPrice(product, goldPrice),
     };
   }
-
   return undefined;
 };
