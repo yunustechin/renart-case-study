@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Nunito:wght@400;500;700&display=swap');
+
+:root {
+  --color-yellow-gold: #E6CA97;
+  --color-white-gold: #D9D9D9;
+  --color-rose-gold: #E1A4A9;
+}
+
+body {
+  margin: 0;
+  font-family: 'Nunito', sans-serif;
+  background-color: #ffffff;
+  color: #333333;
+}
+
+.product-showcase-app {
+  width: 100%;
+  max-width: 1400px;
+  margin: 40px auto;
+  padding: 20px;
+  box-sizing: border-box;
+}
