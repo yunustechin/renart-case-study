@@ -21,4 +21,4 @@ Thumbs.db
 
 # Optional: Build output
 /dist
-/build
+/build.env
