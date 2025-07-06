@@ -4,7 +4,7 @@ import './App.css';
 
 function App() {
   return (
-    <main className="product-showcase-app">
+    <main className="product-lists-app">
       <ProductList />
     </main>
   );
