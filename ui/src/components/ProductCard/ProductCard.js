@@ -1,81 +1,81 @@
-import React, { useState, useEffect, useRef } from 'react';
-import ProductCard from '../ProductCard/ProductCard';
+import React, { useState } from 'react';
 import styles from './ProductCard.module.css';
-import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { FaStar, FaStarHalfAlt, FaRegStar } from 'react-icons/fa';
 
-/**
- * A reusable loader component displayed while data is being fetched.
- * @returns {JSX.Element} A spinning loader animation.
- */
-const Loader = () => (
-  <div className={styles.loaderContainer}>
-    <div className={styles.loader}></div>
-  </div>
-);
-
-/**
- * A reusable component to display an error message when data fetching fails.
- * @param {object} props - The component props.
- * @param {string} props.message - The error description to be displayed.
- * @returns {JSX.Element} A formatted error message container.
- */
-const ErrorMessage = ({ message }) => (
-  <div className={styles.errorContainer}>
-    <h3>An Error Occurred</h3>
-    <p>{message}</p>
-  </div>
-);
-
-/**
- * Fetches and displays a scrollable list of products. It includes
- * navigation controls to scroll horizontally and handles loading and error states.
- * @returns {JSX.Element} A horizontally scrollable list of ProductCards with navigation.
- */
-const ProductList = () => {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const scrollRef = useRef(null);
-
-  useEffect(() => {
-    fetch('/products')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then(data => setProducts(data))
-      .catch(err => setError('Products could not be loaded. Make sure the backend server is running.'))
-      .finally(() => setLoading(false));
-  }, []);
-
-  /**
-   * Scrolls the product list horizontally.
-   * @param {'left' | 'right'} direction - The direction in which to scroll.
-   */
-  const scroll = (direction) => {
-    if (scrollRef.current) {
-      const scrollAmount = scrollRef.current.offsetWidth * 0.8;
-      scrollRef.current.scrollLeft += direction === 'left' ? -scrollAmount : scrollAmount;
-    }
-  };
-
-  if (loading) return <Loader />;
-  if (error) return <ErrorMessage message={error} />;
-
-  return (
-    <div className={styles.productListContainer}>
-      <h2 className={styles.listTitle}>Product List</h2>
-      <div className={styles.navigationWrapper}>
-        <button className={`${styles.navBtn} ${styles.left}`} onClick={() => scroll('left')} aria-label="Scroll Left"><FaChevronLeft /></button>
-        <div className={styles.productList} ref={scrollRef}>
-          {products.map((product) => <ProductCard key={product.id} product={product} />)}
-        </div>
-        <button className={`${styles.navBtn} ${styles.right}`} onClick={() => scroll('right')} aria-label="Scroll Right"><FaChevronRight /></button>
-      </div>
-    </div>
-  );
+const COLOR_OPTIONS = {
+    yellow: { name: 'Yellow Gold' },
+    white: { name: 'White Gold' },
+    rose: { name: 'Rose Gold' },
 };
 
-export default ProductList;
+/**
+ * StarRating component to visually represent a product's popularity score.
+ * It renders full, half, and empty stars based on the given rating.
+ *
+ * @param {object} props
+ * @param {number} props.rating - Rating between 0 and 5
+ * @returns {JSX.Element}
+ */
+const StarRating = ({ rating }) => {
+    const ratingText = parseFloat(rating).toFixed(1);
+    const fullStars = Math.floor(rating);
+    const halfStar = rating % 1 >= 0.5;
+    const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
+    return (
+        <div className={styles.starRating}>
+            <div className={styles.stars}>
+                {[...Array(fullStars)].map((_, i) => <FaStar key={`full-${i}`} />)}
+                {halfStar && <FaStarHalfAlt />}
+                {[...Array(emptyStars)].map((_, i) => <FaRegStar key={`empty-${i}`} />)}
+            </div>
+            <span className={styles.ratingText}>{ratingText}/5</span>
+        </div>
+    );
+};
+
+/**
+ * ProductCard component displays a single product's information including:
+ * - Product image (by selected color)
+ * - Product name and dynamic price
+ * - Color selector and rating
+ *
+ * @param {object} props
+ * @param {object} props.product - Product object containing details and images
+ * @returns {JSX.Element|null}
+ */
+const ProductCard = ({ product }) => {
+    const [selectedColor, setSelectedColor] = useState('yellow');
+
+    if (!product?.images) return null;
+
+    return (
+        <div className={styles.productCard}>
+            <div className={styles.productImageContainer}>
+                <img
+                    src={product.images[selectedColor]}
+                    alt={`${product.name} - ${COLOR_OPTIONS[selectedColor].name}`}
+                    className={styles.productImage}
+                    onError={(e) => { e.target.src = 'https://placehold.co/400x400/f7f7f7/ccc?text=No+Picture'; }}
+                />
+            </div>
+            <div className={styles.productInfo}>
+                <h3 className={styles.productTitle}>{product.name}</h3>
+                <p className={styles.productPrice}>${product.dynamicPrice?.toFixed(2)} USD</p>
+                <div className={styles.colorPicker}>
+                    {Object.keys(COLOR_OPTIONS).map((color) => (
+                        <div
+                            key={color}
+                            className={`${styles.colorSwatch} ${selectedColor === color ? styles.selected : ''}`}
+                            style={{ backgroundColor: `var(--color-${color}-gold)` }}
+                            onClick={() => setSelectedColor(color)}
+                        />
+                    ))}
+                </div>
+                <p className={styles.colorName}>{COLOR_OPTIONS[selectedColor].name}</p>
+                <StarRating rating={product.popularityScore * 5} />
+            </div>
+        </div>
+    );
+};
+
+export default ProductCard;
