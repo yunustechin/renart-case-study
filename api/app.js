@@ -1,13 +1,13 @@
 import express from 'express';
 import cors from 'cors';
-import path from 'path'; 
+import path from 'path';
 import { fileURLToPath } from 'url';
-import productRoutes from './products.js'; 
-import errorHandler from '../utils/errorHandler.js'; 
+import productRoutes from './products.js';
+import errorHandler from '../utils/errorHandler.js';
 import logger from '../utils/logger.js';
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename); 
+const __dirname = path.dirname(__filename);
 
 const app = express();
 
@@ -25,7 +25,7 @@ app.use((req, res, next) => {
   next();
 });
 
-// app.use('/products', productRoutes);
+app.use('/products', productRoutes);
 
 app.use(express.static(path.join(__dirname, '../../ui/build')));
 
