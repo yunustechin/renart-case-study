@@ -1,8 +1,13 @@
 import express from 'express';
 import cors from 'cors';
+import path from 'path'; 
+import { fileURLToPath } from 'url';
 import productRoutes from './products.js'; 
 import errorHandler from '../utils/errorHandler.js'; 
 import logger from '../utils/logger.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename); 
 
 const app = express();
 
@@ -21,6 +26,12 @@ app.use((req, res, next) => {
 });
 
 app.use('/products', productRoutes);
+
+app.use(express.static(path.join(__dirname, '../../ui/build')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../../ui/build', 'index.html'));
+});
 
 app.use((req, res, next) => {
   const error = new Error(`Not Found - ${req.originalUrl}`);
