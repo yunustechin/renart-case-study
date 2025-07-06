@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import ProductCard from '../ProductCard/ProductCard';
-import styles from './ProductList.module.css';
+import styles from './ProductCard.module.css';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 /**
