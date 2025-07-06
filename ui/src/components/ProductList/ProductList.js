@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import ProductCard from '../ProductCard/ProductCard';
 import styles from './ProductList.module.css';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
