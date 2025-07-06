@@ -27,10 +27,10 @@ app.use((req, res, next) => {
 
 app.use('/products', productRoutes);
 
-app.use(express.static(path.join(__dirname, '../', '../', 'ui', 'build')));
+app.use(express.static(path.join(__dirname, '..', 'ui', 'build')));
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../', '../', 'ui', 'build', 'index.html'));
+  res.sendFile(path.join(__dirname, '..', 'ui', 'build', 'index.html'));
 });
 
 app.use((req, res, next) => {
