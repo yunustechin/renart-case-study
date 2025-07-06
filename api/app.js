@@ -25,7 +25,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/products', productRoutes);
+// app.use('/products', productRoutes);
 
 app.use(express.static(path.join(__dirname, '../../ui/build')));
 
