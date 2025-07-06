@@ -3,7 +3,6 @@ import ProductCard from '../ProductCard/ProductCard';
 import styles from './ProductList.module.css';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
-const API_BASE_URL = 'http://localhost:5000';
 
 /**
  * Loader component shown during data fetching.
@@ -40,7 +39,7 @@ const ProductList = () => {
   const scrollRef = useRef(null);
 
   useEffect(() => {
-    fetch(`${API_BASE_URL}/products`)
+    fetch('/products')
       .then(response => {
         if (!response.ok) throw new Error('Network response was not ok');
         return response.json();
