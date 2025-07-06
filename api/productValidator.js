@@ -1,4 +1,5 @@
 import { param, validationResult } from 'express-validator';
+import logger from '../utils/logger.js';
 
 /**
  * Validation rules for the product ID URL parameter.
@@ -17,6 +18,11 @@ export const validateProductId = [
 export const handleValidationErrors = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
+      logger.warn('Validation error occurred.', {
+      errors: errors.array(),
+      path: req.originalUrl,
+      ip: req.ip,
+    });
     return res.status(400).json({ errors: errors.array() });
   }
   next();
