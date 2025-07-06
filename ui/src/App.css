@@ -1,20 +1,20 @@
 @font-face {
   font-family: 'Avenir';
-  src: url('../../ui/Fonts/Avenir-Book.ttf') format('truetype');
-  font-weight: normal; /* 400 */
+  src: url('../../ui/Fonts/avenir/Avenir-Book.ttf') format('truetype');
+  font-weight: normal; 
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Montserrat'; /* Doğru yazım */
-  src: url('../../ui/Fonts/Montserrat-Regular.ttf') format('truetype');
-  font-weight: normal; /* 400 */
+  font-family: 'Montserrat'; 
+  src: url('../../ui/Fonts/montserrat/Montserrat-Regular.ttf') format('truetype');
+  font-weight: normal; 
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Montserrat'; /* Doğru yazım */
-  src: url('../../ui/Fonts/Montserrat-Medium.otf') format('truetype');
+  font-family: 'Montserrat'; 
+  src: url('../../ui/Fonts/montserrat/Montserrat-Medium.otf') format('truetype');
   font-weight: 500;
   font-style: normal;
 }
