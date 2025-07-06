@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './ProductCard.module.css';
 import { FaStar, FaStarHalfAlt, FaRegStar } from 'react-icons/fa';
 
@@ -43,10 +43,10 @@ const StarRating = ({ rating }) => {
  * @param {object} props.product - Product object containing details and images
  * @returns {JSX.Element|null}
  */
-const ProductCard = ({ product }) => {
-    const [selectedColor, setSelectedColor] = useState('yellow');
-
-    if (!product?.images) return null;
+const ProductCard = ({ product, selectedColor, onColorChange }) => {
+    if (!product?.images || !selectedColor) {
+        return null;
+    }
 
     return (
         <div className={styles.productCard}>
@@ -67,7 +67,7 @@ const ProductCard = ({ product }) => {
                             key={color}
                             className={`${styles.colorSwatch} ${selectedColor === color ? styles.selected : ''}`}
                             style={{ backgroundColor: `var(--color-${color}-gold)` }}
-                            onClick={() => setSelectedColor(color)}
+                            onClick={() => onColorChange(product.id, color)}
                         />
                     ))}
                 </div>
@@ -78,4 +78,4 @@ const ProductCard = ({ product }) => {
     );
 };
 
-export default ProductCard;
+export default React.memo(ProductCard);
