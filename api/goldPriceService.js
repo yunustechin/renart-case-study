@@ -1,4 +1,3 @@
-import 'dotenv/config';
 import logger from '../utils/logger.js';
 
 const GOLD_API_URL = "https://www.goldapi.io/api/XAU/USD";
