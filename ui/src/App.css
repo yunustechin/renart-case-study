@@ -14,7 +14,7 @@
 
 @font-face {
   font-family: 'Montserrat'; 
-  src: url('../../ui/Fonts/montserrat/Montserrat-Medium.otf') format('truetype');
+  src: url('../../ui/Fonts/montserrat/Montserrat-Medium.otf') format('opentype');
   font-weight: 500;
   font-style: normal;
 }
