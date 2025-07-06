@@ -43,14 +43,14 @@
   font-size: 15px; 
   margin: 0 0 5px 0;
   flex-grow: 1;
-  color: #333333;
+  color: #000000;
 }
 
 .productPrice {
   font-family: 'Montserrat', sans-serif;
   font-size: 15px;
   font-weight: normal;
-  color: #333333;
+  color: #000000;
   margin: 0 0 10px 0;
 }
 
@@ -72,15 +72,15 @@
 }
 
 .colorSwatch.selected {
-  border-color: #a0a0a0; 
+  border-color: #000000; 
   transform: scale(1.1);
   box-shadow: inset 0 0 0 1px white;
 }
 
 .colorName {
   font-family: 'Avenir', sans-serif;;
-  font-size: 14px;
-  color: #666666;
+  font-size: 12px;
+  color: #000000;
   margin: 0 0 12px 0;
   min-height: 18px;
 }
