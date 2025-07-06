@@ -1,45 +1,46 @@
-import dotenv from 'dotenv';
-import app from './api/app.js';
-import logger from './utils/logger.js';
+console.log('[DEBUG] server.js execution started.');
 
-dotenv.config();
+try {
+  console.log('[DEBUG] Importing dotenv...');
+  const dotenv = (await import('dotenv')).default;
+  console.log('[DEBUG] dotenv imported successfully.');
 
-const PORT = process.env.PORT || 5000;
+  console.log('[DEBUG] Importing logger...');
+  const logger = (await import('./utils/logger.js')).default;
+  console.log('[DEBUG] logger imported successfully.');
 
-const server = app.listen(PORT, () => {
-  logger.info(`Server is running at http://localhost:${PORT}`);
-});
+  console.log('[DEBUG] Importing app from ./api/app.js...');
+  const app = (await import('./api/app.js')).default;
+  console.log('[DEBUG] app imported successfully.');
 
-/**
- * Handles graceful server shutdown. Closes the server and exits the process.
- */
-const exitHandler = () => {
-  if (server) {
-    server.close(() => {
-      logger.info('Server closed');
+  console.log('[DEBUG] Configuring dotenv...');
+  dotenv.config();
+  console.log('[DEBUG] dotenv configured.');
+
+  const PORT = process.env.PORT || 5000;
+
+  console.log(`[DEBUG] Attempting to listen on PORT: ${PORT}`);
+  const server = app.listen(PORT, () => {
+    logger.info(`Server is running at http://localhost:${PORT}`);
+  });
+
+  const exitHandler = () => {
+    if (server) {
+      server.close(() => {
+        logger.info('Server closed');
+        process.exit(1);
+      });
+    } else {
       process.exit(1);
-    });
-  } else {
-    process.exit(1);
-  }
-};
+    }
+  };
+  process.on('SIGTERM', () => {
+    logger.info('SIGTERM received, shutting down gracefully');
+    exitHandler();
+  });
 
-/**
- * Handles unexpected errors, logs them, and triggers a graceful shutdown.
- * @param {Error} error - The unhandled error object.
- */
-const unexpectedErrorHandler = (error) => {
-  logger.error('Unhandled Error:', error);
-  exitHandler();
-};
-
-process.on('uncaughtException', unexpectedErrorHandler);
-process.on('unhandledRejection', (reason) => {
-  logger.error('Unhandled Rejection:', reason);
-  exitHandler();
-});
-
-process.on('SIGTERM', () => {
-  logger.info('SIGTERM received, shutting down gracefully');
-  exitHandler();
-});
+} catch (error) {
+  console.error('[FATAL CRASH] A critical error occurred during server startup:');
+  console.error(error);
+  process.exit(1); 
+}
