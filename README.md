@@ -2,7 +2,7 @@
 
 This is a full-stack application built to fulfill the requirements of a technical assignment. It features a robust backend API developed with Node.js and a dynamic, responsive frontend client built with React.
 
-**Live Demo with ... :** `[Link to your deployed application]`
+**Live Demo with ... :** https://renart-case-study-d8600db4fc02.herokuapp.com/
 
 ## 1. Core Features
 
@@ -70,21 +70,3 @@ The `/products` endpoint supports the following query parameters to filter the r
 * **Popularity Score Filtering:**
     * `popularityScore` (number): Returns products that **exactly match** the specified popularity score.
     * **Example:** `/products?popularityScore=0.95` will list all products with a popularity score of exactly 0.95.
-
-## 4. Local Development
-
-1.  **Backend:**
-    ```bash
-    cd <backend_directory>
-    npm install
-    npm start
-    ```
-    The API will be running on `http://localhost:5000`.
-
-2.  **Frontend:**
-    ```bash
-    cd <frontend_directory>
-    npm install
-    npm start
-    ```
-    The React application will be available at `http://localhost:3000`.
