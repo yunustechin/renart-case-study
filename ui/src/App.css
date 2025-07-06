@@ -1,4 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Nunito:wght@400;500;700&display=swap');
+@font-face {
+  font-family: 'Avenir';
+  src: url('../../ui/Fonts/Avenir-Book.ttf') format('truetype');
+  font-weight: normal; /* 400 */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Montserrat'; /* Doğru yazım */
+  src: url('../../ui/Fonts/Montserrat-Regular.ttf') format('truetype');
+  font-weight: normal; /* 400 */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Montserrat'; /* Doğru yazım */
+  src: url('../../ui/Fonts/Montserrat-Medium.otf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
 
 :root {
   --color-yellow-gold: #E6CA97;
