@@ -5,7 +5,8 @@ import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 
 /**
- * Loader component shown during data fetching.
+ * Loading indicator shown during data fetch.
+ * @returns {JSX.Element}
  */
 const Loader = () => (
   <div className={styles.loaderContainer}>
@@ -14,9 +15,10 @@ const Loader = () => (
 );
 
 /**
- * Error message component displayed when data fetching fails.
- * @param {object} props
- * @param {string} props.message - Error description to be displayed.
+ * Error display component.
+ * @param {Object} props
+ * @param {string} props.message - Error text
+ * @returns {JSX.Element}
  */
 const ErrorMessage = ({ message }) => (
   <div className={styles.errorContainer}>
@@ -26,11 +28,8 @@ const ErrorMessage = ({ message }) => (
 );
 
 /**
- * ProductList component fetches and displays a scrollable list of product cards.
- * It supports horizontal navigation and provides user feedback on loading or error states.
- *
- * @component
- * @returns {JSX.Element} Scrollable product list with navigation arrows
+ * Renders and manages a horizontally scrollable product list.
+ * @returns {JSX.Element}
  */
 const ProductList = () => {
   const [products, setProducts] = useState([]);
@@ -57,6 +56,11 @@ const ProductList = () => {
       .finally(() => setLoading(false));
   }, []);
 
+  /**
+   * Updates selected color of a product.
+   * @param {number|string} productId 
+   * @param {string} color 
+   */
   const handleColorChange = useCallback((productId, color) => {
     setProductColors(prevColors => ({
       ...prevColors,
@@ -64,7 +68,10 @@ const ProductList = () => {
     }));
   }, []);
 
-
+  /**
+   * Scrolls the product list horizontally.
+   * @param {'left'|'right'} direction 
+   */
   const scroll = (direction) => {
     if (scrollRef.current) {
       const scrollAmount = scrollRef.current.offsetWidth * 0.8;
