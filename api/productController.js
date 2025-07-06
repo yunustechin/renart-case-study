@@ -1,4 +1,5 @@
 import * as productService from './productService.js';
+import logger from '../utils/logger.js';
 
 /**
  * Express controller to handle the request for getting all products.
@@ -15,6 +16,11 @@ export const getAllProducts = async (req, res, next) => {
       maxPrice: maxPrice ? parseFloat(maxPrice) : undefined,
       popularityScore: popularityScore ? parseFloat(popularityScore) : undefined,
     };
+
+    if (Object.values(filters).some(v => v !== undefined)) {
+      logger.info('Applying filters:', filters);
+    }
+
     const products = await productService.getProducts(filters);
     res.status(200).json(products);
   } catch (error) {
@@ -31,6 +37,7 @@ export const getAllProducts = async (req, res, next) => {
 export const getProductById = async (req, res, next) => {
   try {
     const { id } = req.params;
+    logger.info(`Attempting to fetch product with ID: ${id}`);
     const product = await productService.getProductById(id);
 
     if (product) {
@@ -44,4 +51,3 @@ export const getProductById = async (req, res, next) => {
     next(error);
   }
 };
-
