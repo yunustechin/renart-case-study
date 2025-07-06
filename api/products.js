@@ -5,11 +5,12 @@ import { validateProductId, handleValidationErrors } from './productValidator.js
 const router = express.Router();
 
 router.get('/', getAllProducts);
+
 router.get(
   '/:id',
-  validateProductId,     
-  handleValidationErrors, 
-  getProductById          
+  validateProductId,
+  handleValidationErrors,
+  getProductById
 );
 
 export default router;
