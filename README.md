@@ -1,6 +1,6 @@
 # Full-Stack Case Study 
 
-This is a full-stack application built to fulfill the requirements of a technical assignment. It features a robust backend API developed with Node.js and a dynamic, responsive frontend client built with React.
+This is a full-stack application built to fulfill the requirements of a technical assignment. It features a robust backend API developed with Node.js and a dynamic, responsive frontend client built with React. 
 
 **Live Demo:** [https://renart-case-study-d8600db4fc02.herokuapp.com/](https://renart-case-study-d8600db4fc02.herokuapp.com/)
 
