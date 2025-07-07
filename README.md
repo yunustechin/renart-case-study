@@ -63,6 +63,8 @@ The frontend is a modern, single-page application (SPA) built with React. It is 
 
 ### Query Parameters for `GET /products`
 
+The backend includes an optional filtering feature that allows products to be queried by price range and popularity score. While this functionality is fully implemented in the API, it has not been integrated into the frontend as it was not part of the project requirements. Please note that local testing of the API may require additional environment configuration (e.g., .env variables), which are not provided, as the project is directly connected and deployed via Heroku. The deployed version contains the filtering logic and can be tested through the appropriate query parameters.
+
 The `/products` endpoint supports the following query parameters to filter the results. These parameters can be used in combination.
 
 * **Price Range Filtering:**
