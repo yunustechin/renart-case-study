@@ -61,17 +61,42 @@ The frontend is a modern, single-page application (SPA) built with React. It is 
 | `GET` | `/products` | Retrieves a list of all products, each with a dynamically calculated price. Supports optional query parameters for filtering. |
 | `GET` | `/products/:id` | Retrieves a single product by its ID, with a dynamically calculated price. |
 
-### Query Parameters for `GET /products`
+## GET /products
 
-The backend includes an optional filtering feature that allows products to be queried by price range and popularity score. While this functionality is fully implemented in the API, it has not been integrated into the frontend as it was not part of the project requirements. Please note that local testing of the API may require additional environment configuration (e.g., .env variables), which are not provided, as the project is directly connected and deployed via Heroku. The deployed version contains the filtering logic and can be tested through the appropriate query parameters.
+**Endpoint:** `https://renart-case-study-d8600db4fc02.herokuapp.com/products`
 
-The `/products` endpoint supports the following query parameters to filter the results. These parameters can be used in combination.
+Returns a list of products, each enriched with a dynamically calculated price based on the current gold price, product popularity score, and weight.
 
-* **Price Range Filtering:**
-    * `minPrice` (number): Returns products with a dynamic price **greater than or equal to** the specified value.
-    * `maxPrice` (number): Returns products with a dynamic price **less than or equal to** the specified value.
-    * **Example:** `/products?minPrice=500&maxPrice=1000` will list all products priced between $500 and $1000, inclusive.
+### Query Parameters(Bonus)
 
-* **Popularity Score Filtering:**
-    * `popularityScore` (number): Returns products that **exactly match** the specified popularity score.
-    * **Example:** `/products?popularityScore=0.95` will list all products with a popularity score of exactly 0.95.
+This endpoint supports the following optional query parameters. They can be used individually or in combination.
+
+#### Price Range
+
+Filters products based on their calculated dynamic price.
+
+- `minPrice` (number):  
+  Returns products with a dynamic price **greater than or equal to** the specified value.
+
+- `maxPrice` (number):  
+  Returns products with a dynamic price **less than or equal to** the specified value.
+
+**Example:**  
+`GET /products?minPrice=500&maxPrice=1000`  
+Returns all products with a dynamic price between 500 and 1000 (inclusive).
+
+#### Popularity Score
+
+- `popularityScore` (number):  
+  Returns products with an **exact match** on the specified popularity score.
+
+**Example:**  
+`GET /products?popularityScore=0.95`  
+Returns all products where the popularity score is exactly 0.95.
+
+### Notes
+
+- All parameters are optional.
+- Parameters can be combined to apply multiple filters.
+- Parameters with empty or invalid values (e.g. `minPrice=`, `maxPrice=abc`) will be ignored.
+- Filtering is applied **after** dynamic prices are calculated on the server.
